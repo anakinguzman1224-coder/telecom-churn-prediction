@@ -18,3 +18,30 @@ Analizar el comportamiento de los clientes y preparar un dataset para entrenar u
 
 ## 📂 Estructura del Repositorio
 * `Proyecto_telecom_2.ipynb`: Cuaderno principal con todo el proceso de limpieza y análisis
+
+## 📊 Resultados del Modelo
+Se evaluaron varios algoritmos, siendo el **Random Forest** el seleccionado debido a su equilibrio entre precisión y detección de fugas (Recall).
+
+| Modelo | Recall (Detecta fugas) | Precision (Acierto en alertas) |
+|--------|-----------------|-------------------------|
+| **Random Forest** | **48%** | **67%** |
+| Regresión Logística | 52% | 65% |
+| Árbol de Decisión | 52% | 60% |
+
+## 💡 Hallazgos Principales
+* **Contratos Mensuales:** Son el factor de mayor riesgo; los clientes sin permanencia tienden a irse más rápido.
+* **Cargos Mensuales:** Clientes con facturas superiores a **$80** tienen una probabilidad significativamente mayor de abandonar.
+* **Fibra Óptica:** Existe una correlación alta entre el servicio de fibra y el Churn, lo que sugiere revisar la calidad del servicio técnico en esa área.
+
+## 🛠️ Cómo usar el modelo entrenado
+Si deseas usar el modelo predictivo sin necesidad de entrenarlo de nuevo, puedes cargarlo en Python de la siguiente manera:
+
+```python
+import pickle
+
+# Cargar el modelo desde el archivo .pkl
+with open('modelo_random_forest.pkl', 'rb') as file:
+    modelo = pickle.load(file)
+
+# Realizar una predicción
+# prediccion = modelo.predict(nuevos_datos)
